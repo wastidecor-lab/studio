@@ -10,10 +10,12 @@ import { chats, messages as allMessages, type Chat, type Message } from '@/lib/d
 import MessageBubble from '@/components/message-bubble';
 import SmartReply from '@/components/smart-reply';
 import { cn } from '@/lib/utils';
+import { useToast } from '@/hooks/use-toast';
 
 export default function ChatScreen() {
   const router = useRouter();
   const params = useParams();
+  const { toast } = useToast();
   const chatId = params.id as string;
 
   const [chat, setChat] = useState<Chat | null>(null);
@@ -62,6 +64,13 @@ export default function ChatScreen() {
     setNewMessage(reply);
   }
 
+  const showComingSoon = () => {
+    toast({
+      title: 'Feature Coming Soon!',
+      description: 'This feature will be available in a future update.',
+    });
+  }
+
   if (!chat) {
     return (
       <div className="flex flex-col h-screen bg-background items-center justify-center">
@@ -85,10 +94,10 @@ export default function ChatScreen() {
           <p className="text-xs text-primary-foreground/80">online</p>
         </div>
         <div className="flex items-center">
-          <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 rounded-full">
+          <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 rounded-full" onClick={showComingSoon}>
             <Video className="h-5 w-5" />
           </Button>
-          <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 rounded-full">
+          <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 rounded-full" onClick={() => router.push(`tel:${chat.phoneNumber}`)}>
             <Phone className="h-5 w-5" />
           </Button>
           <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 rounded-full">
