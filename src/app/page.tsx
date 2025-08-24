@@ -1,4 +1,4 @@
-import { MoreVertical, Search, MessageSquare, Phone, Camera } from "lucide-react";
+import { MoreVertical, Search, MessageSquare, Phone, Camera, Settings, Newspaper } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ChatList from "@/components/chat-list";
@@ -6,6 +6,13 @@ import StatusList from "@/components/status-list";
 import CallHistory from "@/components/call-history";
 import MiniAppsGrid from "@/components/mini-apps-grid";
 import { chats, statuses, calls } from "@/lib/data";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
 
 export default function Home() {
   return (
@@ -16,11 +23,23 @@ export default function Home() {
             <h1 className="text-xl font-bold">ZikarX</h1>
             <div className="flex items-center space-x-1">
               <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 rounded-full">
-                <Search className="h-5 w-5" />
+                <Camera className="h-5 w-5" />
               </Button>
               <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 rounded-full">
-                <MoreVertical className="h-5 w-5" />
+                <Search className="h-5 w-5" />
               </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 rounded-full">
+                    <MoreVertical className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>New Group</DropdownMenuItem>
+                  <DropdownMenuItem>Settings</DropdownMenuItem>
+                  <DropdownMenuItem>Logout</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         </div>
@@ -28,10 +47,11 @@ export default function Home() {
       
       <Tabs defaultValue="chats" className="w-full flex-grow flex flex-col">
         <div className="bg-primary sticky top-[60px] z-20">
-          <TabsList className="grid w-full grid-cols-3 bg-primary text-primary-foreground/70 rounded-none p-0 h-auto">
+          <TabsList className="grid w-full grid-cols-4 bg-primary text-primary-foreground/70 rounded-none p-0 h-auto">
             <TabsTrigger value="chats" className="py-3 text-sm font-bold rounded-none data-[state=active]:text-accent data-[state=active]:bg-primary data-[state=active]:border-b-2 data-[state=active]:border-accent focus-visible:ring-offset-0 focus-visible:ring-0">CHATS</TabsTrigger>
-            <TabsTrigger value="status" className="py-3 text-sm font-bold rounded-none data-[state=active]:text-accent data-[state=active]:bg-primary data-[state=active]:border-b-2 data-[state=active]:border-accent focus-visible:ring-offset-0 focus-visible:ring-0">STATUS</TabsTrigger>
-            <TabsTrigger value="mini-apps" className="py-3 text-sm font-bold rounded-none data-[state=active]:text-accent data-[state=active]:bg-primary data-[state=active]:border-b-2 data-[state=active]:border-accent focus-visible:ring-offset-0 focus-visible:ring-0">MINI APPS</TabsTrigger>
+            <TabsTrigger value="updates" className="py-3 text-sm font-bold rounded-none data-[state=active]:text-accent data-[state=active]:bg-primary data-[state=active]:border-b-2 data-[state=active]:border-accent focus-visible:ring-offset-0 focus-visible:ring-0">UPDATES</TabsTrigger>
+            <TabsTrigger value="calls" className="py-3 text-sm font-bold rounded-none data-[state=active]:text-accent data-[state=active]:bg-primary data-[state=active]:border-b-2 data-[state=active]:border-accent focus-visible:ring-offset-0 focus-visible:ring-0">CALLS</TabsTrigger>
+            <TabsTrigger value="tools" className="py-3 text-sm font-bold rounded-none data-[state=active]:text-accent data-[state=active]:bg-primary data-[state=active]:border-b-2 data-[state=active]:border-accent focus-visible:ring-offset-0 focus-visible:ring-0">TOOLS</TabsTrigger>
           </TabsList>
         </div>
 
@@ -42,7 +62,7 @@ export default function Home() {
                     <MessageSquare className="h-6 w-6 text-primary-foreground" />
                 </Button>
             </TabsContent>
-            <TabsContent value="status" className="m-0">
+            <TabsContent value="updates" className="m-0">
                 <StatusList statuses={statuses} />
                  <div className="absolute bottom-6 right-6 flex flex-col items-center gap-4 z-10">
                     <Button aria-label="Add status text" className="h-10 w-10 rounded-full bg-secondary shadow-lg hover:bg-secondary/90">
@@ -53,7 +73,13 @@ export default function Home() {
                     </Button>
                 </div>
             </TabsContent>
-            <TabsContent value="mini-apps" className="m-0">
+            <TabsContent value="calls" className="m-0">
+              <CallHistory calls={calls} />
+              <Button aria-label="New call" className="absolute bottom-6 right-6 h-14 w-14 rounded-full bg-accent shadow-lg hover:bg-accent/90 z-10">
+                  <Phone className="h-6 w-6 text-primary-foreground" />
+              </Button>
+            </TabsContent>
+            <TabsContent value="tools" className="m-0">
                 <MiniAppsGrid />
             </TabsContent>
         </div>
