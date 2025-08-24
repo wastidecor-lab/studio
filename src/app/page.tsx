@@ -1,6 +1,9 @@
 
+'use client';
+import { useState } from "react";
 import Link from "next/link";
-import { MoreVertical, Search, Camera, MessageSquare, Phone, Newspaper, Cog } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { MoreVertical, Search, Camera, MessageSquare, Phone, Newspaper, Cog, PhoneCall, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ChatList from "@/components/chat-list";
@@ -17,6 +20,46 @@ import {
 
 
 export default function Home() {
+  const router = useRouter();
+  const [currentTab, setCurrentTab] = useState("chats");
+
+  const renderFab = () => {
+    switch (currentTab) {
+      case 'chats':
+        return (
+          <Button size="icon" className="rounded-full h-14 w-14 bg-accent hover:bg-accent/90 shadow-lg" onClick={() => console.log('New Chat')}>
+            <MessageSquare />
+          </Button>
+        );
+      case 'updates':
+         return (
+          <div className="flex flex-col items-center gap-2">
+            <Button size="icon" variant="outline" className="rounded-full h-10 w-10 bg-card hover:bg-muted/80 shadow-sm border">
+                <Camera />
+            </Button>
+            <Button size="icon" className="rounded-full h-14 w-14 bg-accent hover:bg-accent/90 shadow-lg" onClick={() => router.push('/status/create')}>
+                <Plus />
+            </Button>
+          </div>
+        );
+      case 'calls':
+        return (
+          <Button size="icon" className="rounded-full h-14 w-14 bg-accent hover:bg-accent/90 shadow-lg" onClick={() => console.log('New Call')}>
+            <PhoneCall />
+          </Button>
+        );
+      case 'tools':
+        return (
+          <Button size="icon" className="rounded-full h-14 w-14 bg-accent hover:bg-accent/90 shadow-lg" onClick={() => console.log('Add new tool')}>
+            <Plus />
+          </Button>
+        );
+      default:
+        return null;
+    }
+  }
+
+
   return (
     <div className="flex flex-col h-screen bg-background text-foreground">
       <header className="bg-primary text-primary-foreground shadow-md sticky top-0 z-20">
@@ -51,7 +94,7 @@ export default function Home() {
         </div>
       </header>
       
-      <Tabs defaultValue="chats" className="w-full flex-grow flex flex-col">
+      <Tabs defaultValue="chats" className="w-full flex-grow flex flex-col" onValueChange={setCurrentTab}>
         <main className="flex-grow overflow-y-auto pb-14">
             <TabsContent value="chats" className="m-0 flex-grow overflow-y-auto">
                 <ChatList chats={chats} />
@@ -67,6 +110,10 @@ export default function Home() {
             </TabsContent>
         </main>
         
+        <div className="fixed bottom-16 right-4 z-30">
+            {renderFab()}
+        </div>
+
         <div className="fixed bottom-0 left-0 right-0 z-20">
             <TabsList className="grid w-full grid-cols-4 bg-primary text-primary-foreground/70 rounded-none h-auto p-0">
                 <TabsTrigger value="chats" className="flex-col gap-1 py-2 text-xs font-medium rounded-none data-[state=active]:text-accent data-[state=active]:bg-primary focus-visible:ring-offset-0 focus-visible:ring-0">
