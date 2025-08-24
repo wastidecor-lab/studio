@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'ChatWave',
+  title: 'ZikarX',
   description: 'A WhatsApp Clone built with Next.js and Firebase Studio',
 };
 
