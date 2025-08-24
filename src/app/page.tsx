@@ -13,7 +13,7 @@ export default function Home() {
       <header className="bg-primary text-primary-foreground shadow-md sticky top-0 z-20">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center py-3">
-            <h1 className="text-xl font-bold">Community Hub</h1>
+            <h1 className="text-xl font-bold">ChatWave</h1>
             <div className="flex items-center space-x-1">
               <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 rounded-full">
                 <Search className="h-5 w-5" />

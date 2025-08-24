@@ -12,7 +12,7 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
   const MessageStatus = () => {
     if (!isSentByMe) return null;
     if (message.status === 'read') {
-      return <CheckCheck className="h-4 w-4 text-blue-500" />;
+      return <CheckCheck className="h-4 w-4 text-accent" />;
     }
     if (message.status === 'delivered') {
       return <CheckCheck className="h-4 w-4 text-muted-foreground" />;

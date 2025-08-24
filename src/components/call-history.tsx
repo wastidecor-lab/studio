@@ -12,7 +12,7 @@ export default function CallHistory({ calls }: CallHistoryProps) {
   const getCallIcon = (type: Call['type']) => {
     const className = cn(
       'h-4 w-4',
-      type === 'missed' ? 'text-red-500' : 'text-accent'
+      type === 'missed' ? 'text-destructive' : 'text-accent'
     );
     if (type === 'outgoing') {
       return <ArrowUpRight className={className} />;
@@ -30,7 +30,7 @@ export default function CallHistory({ calls }: CallHistoryProps) {
               <AvatarFallback>{call.name.charAt(0)}</AvatarFallback>
             </Avatar>
             <div className="flex-1">
-              <p className={cn('font-semibold', call.type === 'missed' && 'text-red-500')}>{call.name}</p>
+              <p className={cn('font-semibold', call.type === 'missed' && 'text-destructive')}>{call.name}</p>
               <div className="flex items-center space-x-1 text-sm text-muted-foreground">
                 {getCallIcon(call.type)}
                 <span>{call.timestamp}</span>
