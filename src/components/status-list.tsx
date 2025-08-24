@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Plus } from 'lucide-react';
 import type { Status } from '@/lib/data';
@@ -10,7 +11,7 @@ export default function StatusList({ statuses }: StatusListProps) {
   return (
     <div className="bg-card h-full">
       <div className="p-4">
-        <div className="flex items-center space-x-4">
+        <Link href="/status/create" className="flex items-center space-x-4 cursor-pointer">
           <div className="relative">
             <Avatar className="h-14 w-14">
               <AvatarImage src="https://placehold.co/100x100.png" alt="My Status" data-ai-hint="profile user" />
@@ -24,7 +25,7 @@ export default function StatusList({ statuses }: StatusListProps) {
             <p className="font-semibold">My status</p>
             <p className="text-sm text-muted-foreground">Tap to add status update</p>
           </div>
-        </div>
+        </Link>
       </div>
       <div className="px-4 py-2 bg-background/70">
         <p className="text-sm font-semibold text-primary">Recent updates</p>
