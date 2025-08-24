@@ -1,3 +1,4 @@
+
 export type Chat = {
   id: string;
   name: string;
@@ -30,6 +31,7 @@ export type Call = {
   type: 'incoming' | 'outgoing' | 'missed';
   callType: 'video' | 'voice';
   timestamp: string;
+  phoneNumber: string;
 };
 
 export const chats: Chat[] = [
@@ -65,7 +67,7 @@ export const statuses: Status[] = [
 ];
 
 export const calls: Call[] = [
-  { id: 'c1', name: 'Alice', avatar: 'https://placehold.co/100x100.png', type: 'missed', callType: 'voice', timestamp: 'Today, 11:05 AM' },
-  { id: 'c2', name: 'Design Team', avatar: 'https://placehold.co/100x100.png', type: 'outgoing', callType: 'video', timestamp: 'Today, 9:00 AM' },
-  { id: 'c3', name: 'Bob', avatar: 'https://placehold.co/100x100.png', type: 'incoming', callType: 'voice', timestamp: 'Yesterday, 10:30 PM' },
+  { id: 'c1', name: 'Alice', avatar: 'https://placehold.co/100x100.png', type: 'missed', callType: 'voice', timestamp: 'Today, 11:05 AM', phoneNumber: '1234567890' },
+  { id: 'c2', name: 'Design Team', avatar: 'https://placehold.co/100x100.png', type: 'outgoing', callType: 'video', timestamp: 'Today, 9:00 AM', phoneNumber: '1234567890' },
+  { id: 'c3', name: 'Bob', avatar: 'https://placehold.co/100x100.png', type: 'incoming', callType: 'voice', timestamp: 'Yesterday, 10:30 PM', phoneNumber: '1234567890' },
 ];

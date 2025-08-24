@@ -1,8 +1,11 @@
+
+'use client';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Phone, Video, ArrowUpRight, ArrowDownLeft } from 'lucide-react';
 import type { Call } from '@/lib/data';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 type CallHistoryProps = {
   calls: Call[];
@@ -36,8 +39,10 @@ export default function CallHistory({ calls }: CallHistoryProps) {
                 <span>{call.timestamp}</span>
               </div>
             </div>
-            <Button variant="ghost" size="icon" className="text-primary hover:bg-primary/10 rounded-full">
-              {call.callType === 'video' ? <Video className="h-6 w-6" /> : <Phone className="h-6 w-6" />}
+            <Button asChild variant="ghost" size="icon" className="text-primary hover:bg-primary/10 rounded-full">
+              <Link href={`tel:${call.phoneNumber}`}>
+                {call.callType === 'video' ? <Video className="h-6 w-6" /> : <Phone className="h-6 w-6" />}
+              </Link>
             </Button>
           </div>
         ))}

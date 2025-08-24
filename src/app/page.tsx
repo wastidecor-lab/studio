@@ -1,3 +1,5 @@
+
+import Link from "next/link";
 import { MoreVertical, Search, Camera, MessageSquare, Phone, Newspaper, Cog } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -22,8 +24,10 @@ export default function Home() {
           <div className="flex justify-between items-center py-3 h-[56px]">
             <h1 className="text-xl font-bold">ZikarX</h1>
             <div className="flex items-center space-x-1">
-              <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 rounded-full">
-                <Camera className="h-5 w-5" />
+              <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 rounded-full" asChild>
+                <Link href="/camera">
+                  <Camera className="h-5 w-5" />
+                </Link>
               </Button>
               <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 rounded-full">
                 <Search className="h-5 w-5" />
@@ -47,7 +51,7 @@ export default function Home() {
         </div>
       </header>
       
-      <main className="flex-grow overflow-y-auto">
+      <main className="flex-grow overflow-y-auto pb-14">
         <Tabs defaultValue="chats" className="w-full flex-grow flex flex-col h-full">
           <TabsContent value="chats" className="m-0 flex-grow overflow-y-auto">
               <ChatList chats={chats} />
