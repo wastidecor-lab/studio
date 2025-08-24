@@ -51,44 +51,43 @@ export default function Home() {
         </div>
       </header>
       
-      <main className="flex-grow overflow-y-auto pb-14">
-        <Tabs defaultValue="chats" className="w-full flex-grow flex flex-col h-full">
-          <TabsContent value="chats" className="m-0 flex-grow overflow-y-auto">
-              <ChatList chats={chats} />
-          </TabsContent>
-          <TabsContent value="updates" className="m-0 flex-grow overflow-y-auto">
-              <StatusList statuses={statuses} />
-          </TabsContent>
-          <TabsContent value="calls" className="m-0 flex-grow overflow-y-auto">
-            <CallHistory calls={calls} />
-          </TabsContent>
-          <TabsContent value="tools" className="m-0 flex-grow overflow-y-auto">
-              <MiniAppsGrid />
-          </TabsContent>
-
-          <div className="fixed bottom-0 left-0 right-0 z-20">
+      <Tabs defaultValue="chats" className="w-full flex-grow flex flex-col">
+        <main className="flex-grow overflow-y-auto pb-14">
+            <TabsContent value="chats" className="m-0 flex-grow overflow-y-auto">
+                <ChatList chats={chats} />
+            </TabsContent>
+            <TabsContent value="updates" className="m-0 flex-grow overflow-y-auto">
+                <StatusList statuses={statuses} />
+            </TabsContent>
+            <TabsContent value="calls" className="m-0 flex-grow overflow-y-auto">
+              <CallHistory calls={calls} />
+            </TabsContent>
+            <TabsContent value="tools" className="m-0 flex-grow overflow-y-auto">
+                <MiniAppsGrid />
+            </TabsContent>
+        </main>
+        
+        <div className="fixed bottom-0 left-0 right-0 z-20">
             <TabsList className="grid w-full grid-cols-4 bg-primary text-primary-foreground/70 rounded-none h-auto p-0">
-              <TabsTrigger value="chats" className="flex-col gap-1 py-2 text-xs font-medium rounded-none data-[state=active]:text-accent data-[state=active]:bg-primary focus-visible:ring-offset-0 focus-visible:ring-0">
-                <MessageSquare />
-                <span>Chats</span>
-              </TabsTrigger>
-              <TabsTrigger value="updates" className="flex-col gap-1 py-2 text-xs font-medium rounded-none data-[state=active]:text-accent data-[state=active]:bg-primary focus-visible:ring-offset-0 focus-visible:ring-0">
-                <Newspaper />
-                <span>Updates</span>
-              </TabsTrigger>
-              <TabsTrigger value="calls" className="flex-col gap-1 py-2 text-xs font-medium rounded-none data-[state=active]:text-accent data-[state=active]:bg-primary focus-visible:ring-offset-0 focus-visible:ring-0">
-                <Phone />
-                <span>Calls</span>
-              </TabsTrigger>
-              <TabsTrigger value="tools" className="flex-col gap-1 py-2 text-xs font-medium rounded-none data-[state=active]:text-accent data-[state=active]:bg-primary focus-visible:ring-offset-0 focus-visible:ring-0">
-                <Cog />
-                <span>Tools</span>
-              </TabsTrigger>
+                <TabsTrigger value="chats" className="flex-col gap-1 py-2 text-xs font-medium rounded-none data-[state=active]:text-accent data-[state=active]:bg-primary focus-visible:ring-offset-0 focus-visible:ring-0">
+                    <MessageSquare />
+                    <span>Chats</span>
+                </TabsTrigger>
+                <TabsTrigger value="updates" className="flex-col gap-1 py-2 text-xs font-medium rounded-none data-[state=active]:text-accent data-[state=active]:bg-primary focus-visible:ring-offset-0 focus-visible:ring-0">
+                    <Newspaper />
+                    <span>Updates</span>
+                </TabsTrigger>
+                <TabsTrigger value="calls" className="flex-col gap-1 py-2 text-xs font-medium rounded-none data-[state=active]:text-accent data-[state=active]:bg-primary focus-visible:ring-offset-0 focus-visible:ring-0">
+                    <Phone />
+                    <span>Calls</span>
+                </TabsTrigger>
+                <TabsTrigger value="tools" className="flex-col gap-1 py-2 text-xs font-medium rounded-none data-[state=active]:text-accent data-[state=active]:bg-primary focus-visible:ring-offset-0 focus-visible:ring-0">
+                    <Cog />
+                    <span>Tools</span>
+                </TabsTrigger>
             </TabsList>
-          </div>
-        </Tabs>
-      </main>
-
+        </div>
+      </Tabs>
     </div>
   );
 }
