@@ -1,6 +1,6 @@
 
 'use client';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { MoreVertical, Search, Camera, MessageSquare, Phone, Newspaper, Cog, PhoneCall, Plus } from "lucide-react";
@@ -11,6 +11,8 @@ import StatusList from "@/components/status-list";
 import CallHistory from "@/components/call-history";
 import MiniAppsGrid from "@/components/mini-apps-grid";
 import { chats, statuses as initialStatuses, calls, type Status } from "@/lib/data";
+import { subscribe as subscribeToStatuses, getStatuses } from '@/lib/status-actions';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,18 +24,19 @@ import {
 export default function Home() {
   const router = useRouter();
   const [currentTab, setCurrentTab] = useState("tools");
-  const [statuses, setStatuses] = useState<Status[]>(initialStatuses);
+  
+  const allInitialStatuses = [...initialStatuses, ...getStatuses()];
+  const [statuses, setStatuses] = useState<Status[]>(allInitialStatuses);
+  
+  useEffect(() => {
+    const unsubscribe = subscribeToStatuses((newStatuses) => {
+        // Combine initial dummy statuses with new statuses
+        setStatuses([...initialStatuses, ...newStatuses]);
+    });
+    // Clean up subscription on component unmount
+    return () => unsubscribe();
+  }, []);
 
-  const addStatus = (newStatus: Omit<Status, 'id' | 'avatar' | 'name' | 'isNew'>) => {
-    const statusToAdd: Status = {
-      id: `s${Date.now()}`,
-      name: 'My Status',
-      avatar: 'https://placehold.co/100x100.png',
-      isNew: true,
-      ...newStatus
-    };
-    setStatuses(prev => [statusToAdd, ...prev]);
-  };
 
   const renderFab = () => {
     switch (currentTab) {
@@ -46,8 +49,10 @@ export default function Home() {
       case 'updates':
          return (
           <div className="flex flex-col items-center gap-2">
-            <Button size="icon" variant="outline" className="rounded-full h-10 w-10 bg-card hover:bg-muted/80 shadow-sm border">
-                <Camera />
+            <Button size="icon" variant="outline" className="rounded-full h-10 w-10 bg-card hover:bg-muted/80 shadow-sm border" asChild>
+                <Link href="/camera">
+                  <Camera />
+                </Link>
             </Button>
             <Button size="icon" className="rounded-full h-14 w-14 bg-accent hover:bg-accent/90 shadow-lg" asChild>
                 <Link href="/status/create">
