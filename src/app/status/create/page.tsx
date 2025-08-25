@@ -1,12 +1,13 @@
 
 'use client';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { ArrowLeft, Palette, Send, Type } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
+import { addStatus } from '@/lib/status-actions';
 
 const bgColors = [
   'bg-slate-700', 'bg-red-500', 'bg-blue-500', 'bg-green-600', 'bg-purple-600', 'bg-pink-500', 'bg-orange-500'
@@ -33,11 +34,16 @@ export default function CreateStatusPage() {
         });
         return;
     }
-    // Placeholder for actual posting logic
-    console.log('Posting status:', { text, bgColor });
+    
+    addStatus({
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        text,
+        bgColor,
+    });
+    
     toast({
       title: 'Status Posted!',
-      description: 'Your status has been shared (placeholder).',
+      description: 'Your status has been shared.',
     });
     router.push('/');
   };

@@ -10,7 +10,7 @@ import ChatList from "@/components/chat-list";
 import StatusList from "@/components/status-list";
 import CallHistory from "@/components/call-history";
 import MiniAppsGrid from "@/components/mini-apps-grid";
-import { chats, statuses, calls } from "@/lib/data";
+import { chats, statuses as initialStatuses, calls, type Status } from "@/lib/data";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,6 +22,18 @@ import {
 export default function Home() {
   const router = useRouter();
   const [currentTab, setCurrentTab] = useState("tools");
+  const [statuses, setStatuses] = useState<Status[]>(initialStatuses);
+
+  const addStatus = (newStatus: Omit<Status, 'id' | 'avatar' | 'name' | 'isNew'>) => {
+    const statusToAdd: Status = {
+      id: `s${Date.now()}`,
+      name: 'My Status',
+      avatar: 'https://placehold.co/100x100.png',
+      isNew: true,
+      ...newStatus
+    };
+    setStatuses(prev => [statusToAdd, ...prev]);
+  };
 
   const renderFab = () => {
     switch (currentTab) {
@@ -37,8 +49,10 @@ export default function Home() {
             <Button size="icon" variant="outline" className="rounded-full h-10 w-10 bg-card hover:bg-muted/80 shadow-sm border">
                 <Camera />
             </Button>
-            <Button size="icon" className="rounded-full h-14 w-14 bg-accent hover:bg-accent/90 shadow-lg" onClick={() => router.push('/status/create')}>
-                <Plus />
+            <Button size="icon" className="rounded-full h-14 w-14 bg-accent hover:bg-accent/90 shadow-lg" asChild>
+                <Link href="/status/create">
+                  <Plus />
+                </Link>
             </Button>
           </div>
         );

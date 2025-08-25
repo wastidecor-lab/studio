@@ -23,6 +23,9 @@ export type Status = {
   avatar: string;
   timestamp: string;
   isNew: boolean;
+  text?: string;
+  bgColor?: string;
+  imageUrl?: string;
 };
 
 export type Call = {
