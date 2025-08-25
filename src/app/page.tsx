@@ -21,7 +21,7 @@ import {
 
 export default function Home() {
   const router = useRouter();
-  const [currentTab, setCurrentTab] = useState("chats");
+  const [currentTab, setCurrentTab] = useState("tools");
 
   const renderFab = () => {
     switch (currentTab) {
@@ -94,7 +94,7 @@ export default function Home() {
         </div>
       </header>
       
-      <Tabs defaultValue="chats" className="w-full flex-grow flex flex-col" onValueChange={setCurrentTab}>
+      <Tabs defaultValue="tools" className="w-full flex-grow flex flex-col" onValueChange={setCurrentTab}>
         <main className="flex-grow overflow-y-auto pb-14">
             <TabsContent value="chats" className="m-0 flex-grow overflow-y-auto">
                 <ChatList chats={chats} />
