@@ -37,6 +37,11 @@ export default function Home() {
     return () => unsubscribe();
   }, []);
 
+  const handleNewCall = () => {
+    // In a real app, this would open a contact picker
+    // For now, we'll use a placeholder number
+    router.push('tel:123-456-7890');
+  };
 
   const renderFab = () => {
     switch (currentTab) {
@@ -63,7 +68,7 @@ export default function Home() {
         );
       case 'calls':
         return (
-          <Button size="icon" className="rounded-full h-14 w-14 bg-accent hover:bg-accent/90 shadow-lg" onClick={() => console.log('New Call')}>
+          <Button size="icon" className="rounded-full h-14 w-14 bg-accent hover:bg-accent/90 shadow-lg" onClick={handleNewCall}>
             <PhoneCall />
           </Button>
         );
