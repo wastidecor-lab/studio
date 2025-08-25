@@ -22,7 +22,13 @@ const SmartReplyOutputSchema = z.object({
 export type SmartReplyOutput = z.infer<typeof SmartReplyOutputSchema>;
 
 export async function smartReplySuggestions(input: SmartReplyInput): Promise<SmartReplyOutput> {
-  return smartReplyFlow(input);
+  try {
+    return await smartReplyFlow(input);
+  } catch (error) {
+    console.error('Error in smartReplyFlow:', error);
+    // Return empty suggestions if the flow fails, e.g., due to API key issues.
+    return { suggestions: [] };
+  }
 }
 
 const prompt = ai.definePrompt({
